@@ -84,7 +84,7 @@ export default function Home() {
           target="_blank"
           className=" text-green-300 font-bold"
         >
-          Kyaw
+          Kyaw Zin Htet
         </a>
       </p>
     </footer>

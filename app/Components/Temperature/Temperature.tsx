@@ -43,17 +43,23 @@ const Temperature = () => {
         }
     };
 
-    //live tiem data
-    useEffect(() =>{
-        const inteval = setInterval(() =>{
-            const localMoment = moment().utcOffset(timezone / 60);
-
-            const formatedTime = localMoment.format("HH:mm:ss");
-            const day = localMoment.format("dddd");
-            setLocalTime(formatedTime);
-            setCurrentDay(day);
-        }, 1000)
-    },[]);
+    //live time data
+    useEffect(() => {
+        // upadte time every second
+        const interval = setInterval(() => {
+          const localMoment = moment().utcOffset(timezone / 60);
+          // custom format: 24 hour format
+          const formatedTime = localMoment.format("HH:mm:ss");
+          // day of the week
+          const day = localMoment.format("dddd");
+    
+          setLocalTime(formatedTime);
+          setCurrentDay(day);
+        }, 1000);
+    
+        // clear interval
+        return () => clearInterval(interval);
+      }, [timezone]);
 
   return (
     <div className="pt-6 pb-5 px-4 border rounded-lg flex flex-col 
