@@ -19,15 +19,6 @@ function Navbar() {
 
         <div className="btn-group flex items-center gap-2">
           <ThemeDropdown />
-
-          <Button
-            className="source-code-btn flex items-center gap-2"
-            onClick={() => {
-              router.push("https//github.com");
-            }}
-          >
-            {github}
-          </Button>
         </div>
       </div>
     </div>
