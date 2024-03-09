@@ -4,8 +4,14 @@ import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useGlobalContext } from "@/app/context/globalContext";
 
-function FlyToActiveCity({ activeCityCords }) {
-  const map = useMap();
+
+interface Coordinates {
+  lat: number;
+  lon: number;
+}
+
+function FlyToActiveCity({ activeCityCords }: { activeCityCords: Coordinates }) {
+  const map = useMap(); // Now using useMap inside MapContainer
 
   useEffect(() => {
     if (activeCityCords) {

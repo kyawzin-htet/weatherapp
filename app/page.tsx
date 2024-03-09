@@ -91,3 +91,8 @@ export default function Home() {
   </main>
   );
 }
+
+export const metadata = {
+  title: "WatchWeather",
+  description: "Watch Wether App with NextJs 14",
+}
