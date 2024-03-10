@@ -4,14 +4,13 @@ import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import { useGlobalContext } from "@/app/context/globalContext";
 
-
 interface Coordinates {
   lat: number;
   lon: number;
 }
 
 function FlyToActiveCity({ activeCityCords }: { activeCityCords: Coordinates }) {
-  const map = useMap(); // Now using useMap inside MapContainer
+  const map = useMap();
 
   useEffect(() => {
     if (activeCityCords) {
@@ -20,11 +19,7 @@ function FlyToActiveCity({ activeCityCords }: { activeCityCords: Coordinates }) 
         duration: 1.5,
       };
 
-      map.flyTo(
-        [activeCityCords.lat, activeCityCords.lon],
-        zoomLev,
-        flyToOptions
-      );
+      map.flyTo([activeCityCords.lat, activeCityCords.lon], zoomLev, flyToOptions);
     }
   }, [activeCityCords, map]);
 
@@ -32,11 +27,11 @@ function FlyToActiveCity({ activeCityCords }: { activeCityCords: Coordinates }) 
 }
 
 function Mapbox() {
-  const { forecast } = useGlobalContext(); // Your coordinates
+  const { forecast } = useGlobalContext();
 
   const activeCityCords = forecast?.coord;
 
-  if (!forecast || !forecast.coord || !activeCityCords) {
+  if (!forecast ||!forecast.coord ||!activeCityCords) {
     return (
       <div>
         <h1>Loading</h1>
@@ -44,20 +39,19 @@ function Mapbox() {
     );
   }
 
+  const position = [activeCityCords.lat, activeCityCords.lon] as [number, number];
+
   return (
     <div className="flex-1 basis-[50%] border rounded-lg">
       <MapContainer
-        center={[activeCityCords.lat, activeCityCords.lon]}
+        center={position}
         zoom={13}
         scrollWheelZoom={false}
-        className="rounded-lg m-4"
-        style={{ height: "calc(100% - 2rem)", width: "calc(100% - 2rem)" }}
+        style={{ height: "calc(100% - 2rem)", width: "calc(100% - 2rem)"}}
       >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-
         <FlyToActiveCity activeCityCords={activeCityCords} />
       </MapContainer>
     </div>
