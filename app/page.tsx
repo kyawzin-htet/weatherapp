@@ -3,7 +3,7 @@ import AirPollution from "./Components/AirPollution/AirPollution";
 import DialyForecast from "./Components/DialyForecast/DialyForecast";
 import FeelsLike from "./Components/FeelsLike/FeelsLike";
 import Humidity from "./Components/Humidity/Humidity";
-import MapBox from "./Components/MapBox/MapBox";
+// import MapBox from "./Components/MapBox/MapBox";
 import Navbar from "./Components/Navbar";
 import Population from "./Components/Population/Population";
 import Pressure from "./Components/Pressure/Pressure";
@@ -15,7 +15,9 @@ import Wind from "./Components/Wind/Wind";
 import defaultStates from "./utils/defaultStates";
 import { useGlobalContextUpdate } from "./context/globalContext";
 import FiveDayForecast from "./Components/FiveDayForecast/FiveDayForecast";
+import dynamic from "next/dynamic";
 
+const MapBox = dynamic(() => import("./Components/MapBox/MapBox"), {ssr:false});
 export default function Home() {
 
   // const { setActiveCityCoords } = useGlobalContextUpdate();
